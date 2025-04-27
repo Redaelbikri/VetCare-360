@@ -1,7 +1,7 @@
-// import Image from 'next/Image';
+
+
 import { Navbar, NavbarBrand, NavLink, Nav, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './OIP (1).jpeg';
 const Exemple = () => {
     return (
         <>
@@ -9,9 +9,9 @@ const Exemple = () => {
                 <Container>
                     <NavbarBrand href="#home"></NavbarBrand>
                     <Nav className="me-auto">
-                        <NavLink href="#home">Home</NavLink>
-                        <NavLink href="#features">Features</NavLink>
-                        <NavLink href="#pricing">Pricing</NavLink>
+                        <NavLink href="/">Home</NavLink>
+                        <NavLink href="./veterinerians">Liste de Veterinaires</NavLink>
+                        <NavLink href="./titulaires">recherche de titulaire</NavLink>
                     </Nav>
                 </Container>
             </Navbar>

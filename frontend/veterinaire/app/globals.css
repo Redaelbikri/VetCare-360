@@ -54,3 +54,10 @@ body {
   z-index: 2;
   /* Make sure content within .bg is above the overlay */
 }
+
+.salam {
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
