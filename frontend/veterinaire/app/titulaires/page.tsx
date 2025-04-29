@@ -2,6 +2,7 @@ import InputGroupText from "react-bootstrap/esm/InputGroupText";
 import Exemple from "../components/Exemple";
 import "../globals.css";
 import { Card, CardBody, CardText, CardTitle, Form, InputGroup, FormControl, FormLabel, Button } from 'react-bootstrap';
+import Link from "next/link";
 export default function () {
     return (
         <>
@@ -28,7 +29,9 @@ export default function () {
                                 </InputGroup>
                                 <Button>Chercher le titulaire </Button>
                                 <br /><br />
-                                <Button>Ajouter un titulaire</Button>
+                                <Link href="./Ajout_titulaire">
+                                    <Button>Ajouter un titulaire</Button>
+                                </Link>
                             </CardText>
                         </CardBody>
                     </Card>
