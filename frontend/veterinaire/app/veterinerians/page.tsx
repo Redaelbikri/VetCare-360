@@ -1,10 +1,22 @@
+'use client';
 import Exemple from '../components/Exemple';
 import { Card, CardBody, CardText, CardTitle } from 'react-bootstrap';
 import "../globals.css";
+import { use, useEffect, useState } from 'react';
 function veterinerians() {
-    const myarray = [{ id: 2, name: "yahya essalhi", speciality: "radiology" }
-        , { id: 3, name: "hamza essalhi", speciality: "surgery" }
-        , { id: 4, name: "sohaib essalhi", speciality: "dentistry surgery" }];
+    type Veterinaire = {
+        firstName: string;
+        lastName: string;
+        specialties: string;
+    };
+    const [veterinaires, setVeterinaires] = useState<Veterinaire[]>([]);
+    //<Veterinaire[]> : indique que l’état est un tableau d’objets de type Veterinaire
+    useEffect(() => {
+        fetch('http://localhost:5000/veterinaires')
+            .then(response => response.json())
+            .then(veterinaires => setVeterinaires(veterinaires))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
     return (<>
         <div className='app'>
             <div className='bg'>
@@ -20,17 +32,17 @@ function veterinerians() {
                                     <table className="table table-striped table-bordered m-5">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                <th>Prenom</th>
                                                 <th>Nom</th>
-                                                <th>specialitees</th>
+                                                <th>specialite</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {myarray.map(item => (
-                                                <tr>
-                                                    <td>{item.id}</td>
-                                                    <td>{item.name}</td>
-                                                    <td>{item.speciality}</td>
+                                            {veterinaires.map(veterinaire => (
+                                                <tr key={veterinaire.firstName}>
+                                                    <td >{veterinaire.firstName}</td>
+                                                    <td>{veterinaire.lastName}</td>
+                                                    <td>{veterinaire.specialties}</td>
                                                 </tr>))}
                                         </tbody>
                                     </table>

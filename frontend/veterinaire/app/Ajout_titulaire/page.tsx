@@ -1,8 +1,35 @@
+'use client';
 import { Button, Card, CardBody, CardText, CardTitle, FormControl, InputGroup } from "react-bootstrap";
 import Exemple from "../components/Exemple";
-import InputGroupText from "react-bootstrap/esm/InputGroupText";
+import { useState } from "react";
 
 export default function ex() {
+    const [nom, setNom] = useState("");
+    const [prenom, setPrenom] = useState("");
+    const [tele, setTele] = useState(0);
+    const [adresse, setAdesse] = useState("");
+    const [ville, setVille] = useState("");
+
+    const Createtitulaire = () => {
+        fetch('http://localhost:5000/proprietaires', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nom: nom,
+                prenom: prenom,
+                telephone: tele,
+                adresse: adresse,
+                ville: ville
+            })
+        })
+            .then(() => {
+                alert("Le propriétaire a été créé avec succès !");
+                window.location.reload(); // recharge la page
+            })
+            .catch(error => console.error('Error:', error));
+    }
     return (
         <>
             <div className='bg'>
@@ -14,56 +41,14 @@ export default function ex() {
                                 <CardTitle >Ajouter Un Nouveau Titulaire </CardTitle>
                             </div>
                             <CardText>
-                                <label className="form-label fw-bold text-danger">
-                                    Prenom :
-                                </label>
-                                <br /><br />
-                                <InputGroup className="mb-3">
-                                    <InputGroupText id="basic-addon1"></InputGroupText>
-                                    <FormControl
-                                        placeholder="Ajouter Votre Prenom"
-                                        aria-label="fname"
-                                        aria-describedby="basic-addon1"
-                                    />
-                                </InputGroup>
-                                <label className="form-label fw-bold text-danger">
-                                    Nom :
-                                </label>
-                                <br /><br />
-                                <InputGroup className="mb-3">
-                                    <InputGroupText id="basic-addon1"></InputGroupText>
-                                    <FormControl
-                                        placeholder="Ajouter Votre nom"
-                                        aria-label="Lname"
-                                        aria-describedby="basic-addon1"
-                                    />
-                                </InputGroup>
-                                <label className="form-label fw-bold text-danger">
-                                    ville :
-                                </label>
-                                <br /><br />
-                                <InputGroup className="mb-3">
-                                    <InputGroupText id="basic-addon1"></InputGroupText>
-                                    <FormControl
-                                        placeholder="Ajouter Votre ville"
-                                        aria-label="city"
-                                        aria-describedby="basic-addon1"
-                                    />
-                                </InputGroup>
-                                <br /><br />
-                                <label className="form-label fw-bold text-danger">
-                                    telephone :
-                                </label>
-                                <br /><br />
-                                <InputGroup className="mb-3">
-                                    <InputGroupText id="basic-addon1"></InputGroupText>
-                                    <FormControl
-                                        placeholder="Ajouter Votre telephone"
-                                        aria-label="fname"
-                                        aria-describedby="basic-addon1"
-                                    />
-                                </InputGroup>
-                                <Button>Ajouter ce titulaire</Button>
+                                <div className="div">
+                                    <input type="text" placeholder="nom" onChange={e => setNom(e.target.value)} /><br /><br />
+                                    <input type="text" placeholder="prenom" onChange={e => setPrenom(e.target.value)} /><br /><br />
+                                    <input type="number" placeholder="telephone" onChange={e => setTele(e.target.value)} /><br /><br />
+                                    <input type="text" placeholder="adresse" onChange={e => setAdesse(e.target.value)} /><br /><br />
+                                    <input type="text" placeholder="ville" onChange={e => setVille(e.target.value)} /><br /><br />
+                                    <button onClick={Createtitulaire}>Creer le proprietaire </button>
+                                </div>
                             </CardText>
                         </CardBody>
                     </Card>

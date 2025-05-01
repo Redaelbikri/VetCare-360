@@ -1,6 +1,6 @@
 const Veterinaire = require('../models/veterinaire');
 
-exports.getAllVets = async (req, res) => {
+exports.getAll = async (req, res) => {
   try {
     const vets = await Veterinaire.find();
     res.status(200).json(vets);
