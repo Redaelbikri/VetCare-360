@@ -2,14 +2,15 @@
 import { Button, Card, CardBody, CardText, CardTitle, FormControl, InputGroup } from "react-bootstrap";
 import Exemple from "../components/Exemple";
 import { useState } from "react";
-
+import "../globals.css";
+import { useRouter } from 'next/navigation';
 export default function ex() {
+    const router = useRouter();
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
-    const [tele, setTele] = useState(0);
+    const [tele, setTele] = useState("");
     const [adresse, setAdesse] = useState("");
     const [ville, setVille] = useState("");
-
     const Createtitulaire = () => {
         fetch('http://localhost:5000/proprietaires', {
             method: 'POST',
@@ -17,6 +18,7 @@ export default function ex() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+
                 nom: nom,
                 prenom: prenom,
                 telephone: tele,
@@ -24,11 +26,17 @@ export default function ex() {
                 ville: ville
             })
         })
-            .then(() => {
-                alert("Le propriétaire a été créé avec succès !");
-                window.location.reload(); // recharge la page
+            .then(res => res.json())
+            .then(data => {
+                const id = data._id;
+                if (id) {
+                    alert("Propriétaire créé !" + id);
+                    router.push(`/titulaire?id=${id}`);// Redirection dynamique
+                } else {
+                    console.error("ID introuvable dans la réponse.");
+                }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Erreur création propriétaire:', error));
     }
     return (
         <>
@@ -47,7 +55,7 @@ export default function ex() {
                                     <input type="number" placeholder="telephone" onChange={e => setTele(e.target.value)} /><br /><br />
                                     <input type="text" placeholder="adresse" onChange={e => setAdesse(e.target.value)} /><br /><br />
                                     <input type="text" placeholder="ville" onChange={e => setVille(e.target.value)} /><br /><br />
-                                    <button onClick={Createtitulaire}>Creer le proprietaire </button>
+                                    <Button onClick={Createtitulaire}>Creer le proprietaire </Button>
                                 </div>
                             </CardText>
                         </CardBody>

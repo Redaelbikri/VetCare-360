@@ -27,7 +27,7 @@ body {
 
 .bg {
   position: relative;
-  height: 100vh;
+  height: 150vh;
   /* Make the container full height */
   background-size: cover;
   /* Make the background image cover the entire area */
