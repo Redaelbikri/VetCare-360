@@ -9,6 +9,7 @@ const animalController = require('../controllers/animalController');
 const visiteController = require('../controllers/visiteController');
 const proprietaireController = require('../controllers/proprietaireController');
 
+router.get('/animaux/proprietaire/:id', animalController.findByProprietaire);
 router.get('/proprietaires/:id', proprietaireController.findById);
 router.get('/proprietaires', proprietaireController.findByNom);
 router.get('/proprietaires', proprietaireController.getAll);

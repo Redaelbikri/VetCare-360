@@ -5,20 +5,38 @@ import "../globals.css";
 import { Card, CardBody, CardText, CardTitle, Form, InputGroup, FormControl, FormLabel, Button } from 'react-bootstrap';
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function () {
     const [nom, setNom] = useState("");
-    const [proprietaires, setProprietaires] = useState<{ nom: string; prenom: string; telephone: string; adresse: string; ville: string; }[]>([]);
+    const [proprietaires, setProprietaires] = useState<{ _id: string, nom: string; prenom: string; telephone: string; adresse: string; ville: string; }[]>([]);
     const Affichertitulaire = () => {
         if (nom) {
             fetch(`http://localhost:5000/proprietaires?nom=${nom}`)
                 .then(response => response.json())
                 .then(data => {
-                    setProprietaires(data)
+                    console.log(data);
+                    setProprietaires(data);
                 })
                 .catch(error => console.error('Error fetching data:', error));
         } else {
             console.log("Veuillez entrer un nom.");
+        }
+    }
+
+    const router = useRouter();
+
+    const handleSelect = (id: string) => {
+        if (id) {
+            alert("ok" + id);
+            router.push(`/Ajout_pet?id=${id}`); // Redirection dynamique
+        }
+    }
+    const handle = (id: string) => {
+        if (id) {
+            alert("salam " + id);
+
+            router.push(`/titulaire?id=${id}`); // Redirection dynamique
         }
     }
 
@@ -64,6 +82,7 @@ export default function () {
                                                                 <th>Telephone</th>
                                                                 <th>Adresse</th>
                                                                 <th>Ville</th>
+                                                                <th>Les actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -74,6 +93,12 @@ export default function () {
                                                                     <td>{proprietaire.telephone}</td>
                                                                     <td>{proprietaire.adresse}</td>
                                                                     <td>{proprietaire.ville}</td>
+                                                                    <td>
+                                                                        <Button onClick={() => handle(proprietaire._id)}>Afficher ce proprietaire</Button>
+
+                                                                        <br /><br />
+                                                                        <Button onClick={() => handleSelect(proprietaire._id)}> Ajouter un animal</Button>
+                                                                    </td>
                                                                 </tr>))}
                                                         </tbody>
                                                     </table>
