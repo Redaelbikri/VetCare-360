@@ -3,6 +3,7 @@ import Exemple from '../components/Exemple';
 import { Card, CardBody, CardText, CardTitle } from 'react-bootstrap';
 import "../globals.css";
 import { use, useEffect, useState } from 'react';
+import Footer from '../components/Footer';
 function veterinerians() {
     type Veterinaire = {
         firstName: string;
@@ -52,7 +53,9 @@ function veterinerians() {
                     </Card>
                 </div>
             </div>
+            <Footer />
         </div >
+
     </>)
 }
 

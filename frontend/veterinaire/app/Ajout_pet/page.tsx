@@ -1,7 +1,7 @@
 'use client';
 import { Button, Card, CardBody, CardText, CardTitle } from "react-bootstrap";
 import Exemple from "../components/Exemple";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function addpet() {
@@ -22,10 +22,9 @@ export default function addpet() {
                 .catch(error => console.error('Error fetching data:', error));
         }
     }, [id]);
+    const router = useRouter();
 
-
-    const Createpet = () => {
-        console.log(selectedProprietaire);
+    const Createpet = (_id: any) => {
         fetch(`http://localhost:5000/animaux`
             , {
                 method: 'POST',
@@ -41,9 +40,10 @@ export default function addpet() {
             })
             .then(res => res.json())
             .then(data => {
-                const id = data._id;
+                const id = _id || data._id;
                 if (id) {
                     alert("animal créé !" + id);
+                    router.push(`/titulaire?id=${id}`);
                 }
             })
             .catch(error => console.error('Erreur création animal:', error))
@@ -66,7 +66,7 @@ export default function addpet() {
                                     <option value="">{proprietaires.nom} {proprietaires.prenom}</option>
                                 </select><br /><br />
 
-                                < Button onClick={Createpet}>Creer l'animal </Button>
+                                < Button onClick={Createpet(proprietaires._id)}>Creer l'animal </Button>
                             </CardText>
                         </CardBody>
                     </Card>

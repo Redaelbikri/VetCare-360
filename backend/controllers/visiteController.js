@@ -20,3 +20,15 @@ exports.create = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+exports.getByAnimalId = async (req, res) => {
+  try {
+    const visites = await Visite.find({ animal: req.params.id }).populate('animal veterinaire');
+    if (!visites || visites.length === 0) {
+      return res.status(404).json({ message: "Aucune visite trouvée pour cet animal." });
+    }
+    res.json(visites);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+

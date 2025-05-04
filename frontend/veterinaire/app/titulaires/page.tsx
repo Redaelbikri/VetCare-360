@@ -6,6 +6,7 @@ import { Card, CardBody, CardText, CardTitle, Form, InputGroup, FormControl, For
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Footer from "../components/Footer";
 
 export default function () {
     const [nom, setNom] = useState("");
@@ -110,10 +111,8 @@ export default function () {
                             </CardText>
                         </CardBody>
                     </Card>
-                </div></div >
-
-
-
+                </div>
+            </div ><Footer />
 
         </>
     );

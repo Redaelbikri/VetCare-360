@@ -34,3 +34,14 @@ exports.findByProprietaire = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.findById = async (req, res) => {
+  try {
+    const animal = await Animal.findById(req.params.id).populate('proprietaire');
+    if (!animal) {
+      return res.status(404).json({ message: "Animal non trouvé" });
+    }
+    res.json(animal);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

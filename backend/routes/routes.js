@@ -15,10 +15,11 @@ router.get('/proprietaires', proprietaireController.findByNom);
 router.get('/proprietaires', proprietaireController.getAll);
 router.post('/proprietaires', proprietaireController.create);
 router.get('/veterinaires', veterinaireController.getAll);
+router.get('/animals/:id', animalController.findById);
 router.get('/animaux', animalController.getAll);
 router.post('/animaux', animalController.create);
 router.get('/visites', visiteController.getAll);
 router.post('/visites', visiteController.create);
-
+router.get('/visites/:id', visiteController.getByAnimalId);
 
 module.exports = router;

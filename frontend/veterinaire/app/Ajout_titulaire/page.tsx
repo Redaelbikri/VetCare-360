@@ -4,6 +4,7 @@ import Exemple from "../components/Exemple";
 import { useState } from "react";
 import "../globals.css";
 import { useRouter } from 'next/navigation';
+import Footer from "../components/Footer";
 export default function ex() {
     const router = useRouter();
     const [nom, setNom] = useState("");
@@ -30,7 +31,7 @@ export default function ex() {
             .then(data => {
                 const id = data._id;
                 if (id) {
-                    alert("Propriétaire créé !" + id);
+                    alert("Propriétaire créé !");
                     router.push(`/titulaire?id=${id}`);// Redirection dynamique
                 } else {
                     console.error("ID introuvable dans la réponse.");
@@ -60,7 +61,10 @@ export default function ex() {
                             </CardText>
                         </CardBody>
                     </Card>
-                </div></div >
+                </div>
+
+            </div >
+            <Footer />
         </>
     );
 }

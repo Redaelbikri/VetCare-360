@@ -61,3 +61,31 @@ body {
   border-radius: 10px;
   text-align: center;
 }
+
+.animal-care-text-transparent {
+  max-width: 800px;
+  padding: 30px;
+  border-left: 5px solid rgba(13, 110, 253, 0.6);
+  /* bleu semi-transparent */
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  /* floute l’arrière-plan */
+  background-color: rgba(255, 255, 255, 0.15);
+  /* fond blanc très léger */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  /* texte blanc pour contraste */
+}
+
+.animal-care-text-transparent .title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.animal-care-text-transparent .description {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #f1f1f1;
+}
