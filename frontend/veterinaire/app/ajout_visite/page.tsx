@@ -4,6 +4,7 @@ import Exemple from "../components/Exemple";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "react-bootstrap";
 import Footer from "../components/Footer";
+import "../globals.css";
 
 export default function AjoutVisite() {
     const searchParams = useSearchParams();
@@ -57,6 +58,10 @@ export default function AjoutVisite() {
     }, [id]);
 
     const AjVisite = (nom: any) => {
+        if (!date || !description || !selectedAnimal || !selectedVeterinaire) {
+            alert("Veuillez remplir tous les champs !");
+            return;
+        }
         fetch(`http://localhost:5000/visites`, {
             method: 'POST',
             headers: {
@@ -71,9 +76,8 @@ export default function AjoutVisite() {
         })
             .then(res => res.json())
 
-            .then(data => { // Sauvegarde les données envoyées dans l'état
+            .then(() => {
                 if (animal?.proprietaire._id) {
-                    alert("Visite créée !");
                     router.push(`/titulaire?&animalProprietaireId=${animal?.proprietaire._id}`); // Redirection dynamique
                 }
                 else {

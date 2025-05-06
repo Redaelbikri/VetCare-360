@@ -3,7 +3,8 @@ import { Button, Card, CardBody, CardText, CardTitle } from "react-bootstrap";
 import Exemple from "../components/Exemple";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import "../globals.css";
+import Footer from "../components/Footer";
 export default function addpet() {
     const searchParams = useSearchParams();
     const id = searchParams.get('id');// Récupérer l'ID depuis l'URL
@@ -25,28 +26,32 @@ export default function addpet() {
     const router = useRouter();
 
     const Createpet = (_id: any) => {
-        fetch(`http://localhost:5000/animaux`
-            , {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    nom: nom,
-                    birthday: bd,
-                    type: type,
-                    proprietaire: proprietaires
+        if (!nom || !bd || !type || !_id) {
+            alert("Veuillez remplir tous les champs !");
+        }
+        else {
+            fetch(`http://localhost:5000/animaux`
+                , {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nom: nom,
+                        birthday: bd,
+                        type: type,
+                        proprietaire: proprietaires
+                    })
                 })
-            })
-            .then(res => res.json())
-            .then(data => {
-                const id = _id || data._id;
-                if (id) {
-                    alert("animal créé !" + id);
-                    router.push(`/titulaire?id=${id}`);
-                }
-            })
-            .catch(error => console.error('Erreur création animal:', error))
+                .then(res => res.json())
+                .then(data => {
+                    const id = _id || data._id;
+                    if (id) {
+                        router.push(`/titulaire?id=${id}`);
+                    }
+                })
+                .catch(error => console.error('Erreur création animal:', error))
+        }
     }
     return (
         <>
@@ -59,23 +64,28 @@ export default function addpet() {
                                 <CardTitle >Ajouter Un Nouveau Nouveau animal  </CardTitle>
                             </div>
                             <CardText>
-                                <input type="text" placeholder="nom" onChange={e => setNom(e.target.value)} /><br /><br />
-                                <input type="date" placeholder="date de naissance " onChange={e => setBd(e.target.value)} /><br /><br />
-                                <input type="text" placeholder="type d'animal" onChange={e => setType(e.target.value)} /><br /><br />
-                                <select className="form-select" value={selectedProprietaire} onChange={e => setSelectedProprietaire(e.target.value)}>
-                                    <option value="">{proprietaires.nom} {proprietaires.prenom}</option>
-                                </select><br /><br />
+                                <div className="container my-5">
 
-                                < Button onClick={Createpet(proprietaires._id)}>Creer l'animal </Button>
+                                    <input type="text" className="form-control form-control-lg mb-3" placeholder="Nom" onChange={e => setNom(e.target.value)} />
+
+
+                                    <input type="date" className="form-control form-control-lg mb-3" onChange={e => setBd(e.target.value)} />
+
+
+                                    <input type="text" className="form-control form-control-lg mb-3" placeholder="Type d'animal" onChange={e => setType(e.target.value)} />
+
+
+                                    <select className="form-select form-select-lg" value={selectedProprietaire} onChange={e => setSelectedProprietaire(e.target.value)}>
+                                        <option value="">{proprietaires.nom} {proprietaires.prenom}</option>
+                                    </select>
+                                </div>
+                                < Button onClick={() => Createpet(proprietaires._id)}>Creer l'animal </Button>
                             </CardText>
                         </CardBody>
                     </Card>
                 </div>
-            </div>
+            </div><Footer />
         </>
     );
-}
-function setProprietaires(data: any) {
-    throw new Error("Function not implemented.");
 }
 

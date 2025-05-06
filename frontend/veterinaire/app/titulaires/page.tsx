@@ -16,7 +16,7 @@ export default function () {
             fetch(`http://localhost:5000/proprietaires?nom=${nom}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+
                     setProprietaires(data);
                 })
                 .catch(error => console.error('Error fetching data:', error));
@@ -29,13 +29,13 @@ export default function () {
 
     const handleSelect = (id: string) => {
         if (id) {
-            alert("ok" + id);
+
             router.push(`/Ajout_pet?id=${id}`); // Redirection dynamique
         }
     }
     const handle = (id: string) => {
         if (id) {
-            alert("salam " + id);
+
 
             router.push(`/titulaire?id=${id}`); // Redirection dynamique
         }
@@ -56,7 +56,8 @@ export default function () {
                                     Nom de famille :
                                 </label>
                                 <br /><br />
-                                <input type="text" placeholder="nom" onChange={e => setNom(e.target.value)} /><br /><br />
+                                <input type="text" className="form-control form-control-lg" placeholder="Nom" onChange={e => setNom(e.target.value)} />
+                                <br /><br />
                                 <div className="row">
                                     <div className="col-3">
                                         <Button onClick={Affichertitulaire}>Chercher le titulaire </Button>
