@@ -51,11 +51,11 @@ export default function ex() {
                             </div>
                             <CardText>
                                 <div className="div">
-                                    <input type="text" placeholder="nom" onChange={e => setNom(e.target.value)} /><br /><br />
-                                    <input type="text" placeholder="prenom" onChange={e => setPrenom(e.target.value)} /><br /><br />
-                                    <input type="number" placeholder="telephone" onChange={e => setTele(e.target.value)} /><br /><br />
-                                    <input type="text" placeholder="adresse" onChange={e => setAdesse(e.target.value)} /><br /><br />
-                                    <input type="text" placeholder="ville" onChange={e => setVille(e.target.value)} /><br /><br />
+                                    <input type="text" className="form-control form-control-lg" placeholder="nom" onChange={e => setNom(e.target.value)} /><br /><br />
+                                    <input type="text" className="form-control form-control-lg" placeholder="prenom" onChange={e => setPrenom(e.target.value)} /><br /><br />
+                                    <input type="number" className="form-control form-control-lg" placeholder="telephone" onChange={e => setTele(e.target.value)} /><br /><br />
+                                    <input type="text" className="form-control form-control-lg" placeholder="adresse" onChange={e => setAdesse(e.target.value)} /><br /><br />
+                                    <input type="text" className="form-control form-control-lg" placeholder="ville" onChange={e => setVille(e.target.value)} /><br /><br />
                                     <Button onClick={Createtitulaire}>Creer le proprietaire </Button>
                                 </div>
                             </CardText>
